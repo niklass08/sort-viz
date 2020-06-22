@@ -1,7 +1,9 @@
 .chart {
   width: 50%;
+  min-width: 50%;
 }
 
 .chartContainer {
   display: flex;
+  flex-wrap: wrap;
 }

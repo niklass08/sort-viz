@@ -1,18 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import SelectionSortChart from './component/SelectionSortChart'
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import SortChart from "./component/SortChart";
+
+import SelectionSort from "./sorts/selectionSort";
+import BubbleSort from "./sorts/BubbleSort";
+
+import "./style/index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SelectionSortChart></SelectionSortChart>
-  </React.StrictMode >,
-  document.getElementById('root')
+    <div class="chartContainer">
+      <div class="chart">
+        <SortChart
+          sort={SelectionSort}
+          color="#70CAD1"
+          title="Selection sort"
+        ></SortChart>
+      </div>
+      <div class="chart">
+        <SortChart
+          sort={BubbleSort}
+          color="#70CAD1"
+          title="Bubble sort"
+        ></SortChart>
+      </div>
+    </div>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

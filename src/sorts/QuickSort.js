@@ -4,53 +4,87 @@ export default class QuickSort {
   }
 
   swap(array, i, j) {
-    let clone = array.slice();
-    clone[i] = array[j];
-    clone[j] = array[i];
-    return clone;
+    let tmp = array[i];
+    array[i] = array[j];
+    array[j] = tmp;
   }
 
-  sort(array, low, high) {
-    // let clone = array.slice(low, high + 1);
+  sort(array = this.arrayToSort, low = 0, high = this.arrayToSort.length - 1) {
     if (array.length > 1 && low < high) {
-      let partitionResult = this.partition(array, low, high);
-      var firstHalf = [];
-      var secondHalf = [];
-      if (low < partitionResult.index - 1) {
-        console.log("toto");
-        firstHalf = this.sort(
-          partitionResult.array,
+      let index = this.partition(array, low, high);
+      if (low < index - 1) {
+        this.sort(
+          array,
           low,
-          partitionResult.index - 1
+          index - 1
         );
       }
 
-      if (high > partitionResult.index) {
-        console.log("tata");
-        secondHalf = this.sort(
-          partitionResult.array,
-          partitionResult.index + 1,
+      if (high > index) {
+        this.sort(
+          array,
+          index + 1,
           high
         );
       }
 
-      return [...firstHalf, ...secondHalf];
+      return array;
     } else {
       return array;
     }
   }
 
+  *stepSort(array = this.arrayToSort, low = 0, high = this.arrayToSort.length - 1) {
+    if (array.length > 1 && low < high) {
+      // let index = this.partition(array, low, high);
+      for (let element of this._genPartition(array, low, high)) {
+        if (element.length) {
+          yield element;
+        } else {
+          var index = element;
+        }
+      }
+      yield array;
+      if (low < index - 1) {
+        for (let step of this.stepSort(array, low, index - 1)) {
+          yield step;
+        }
+      }
+
+      if (high > index) {
+        for (let step of this.stepSort(array, index + 1, high)) {
+          yield step;
+        }
+      }
+      yield array;
+    }
+  }
+
   partition(array, low, high) {
-    let clone = array.slice();
-    let pivot = clone[high];
+    let pivot = array[high];
     let i = low;
     for (let j = low; j < high; j++) {
-      if (clone[j] < pivot) {
-        clone = this.swap(clone, i, j);
+      if (array[j] < pivot) {
+        this.swap(array, i, j);
         i += 1;
       }
     }
-    clone = this.swap(clone, i, high);
-    return { array: clone, index: i };
+    this.swap(array, i, high);
+    return i;
+  }
+
+  *_genPartition(array, low, high) {
+    let pivot = array[high];
+    let i = low;
+    for (let j = low; j < high; j++) {
+      if (array[j] < pivot) {
+        this.swap(array, i, j);
+        yield array
+        i += 1;
+      }
+    }
+    this.swap(array, i, high);
+    yield array;
+    yield i;
   }
 }

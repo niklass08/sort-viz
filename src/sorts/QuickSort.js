@@ -11,22 +11,32 @@ export default class QuickSort {
   }
 
   sort(array, low, high) {
-    let clone = array.slice();
-    if (clone.length > 1 && low < high) {
-      let partitionResult = this.partition(clone, low, high);
-      var firstHalf = this.sort(
-        partitionResult.array,
-        low,
-        partitionResult.index - 1
-      );
-      var secondHalf = this.sort(
-        partitionResult.array,
-        partitionResult.index + 1,
-        high
-      );
+    // let clone = array.slice(low, high + 1);
+    if (array.length > 1 && low < high) {
+      let partitionResult = this.partition(array, low, high);
+      var firstHalf = [];
+      var secondHalf = [];
+      if (low < partitionResult.index - 1) {
+        console.log("toto");
+        firstHalf = this.sort(
+          partitionResult.array,
+          low,
+          partitionResult.index - 1
+        );
+      }
+
+      if (high > partitionResult.index) {
+        console.log("tata");
+        secondHalf = this.sort(
+          partitionResult.array,
+          partitionResult.index + 1,
+          high
+        );
+      }
+
       return [...firstHalf, ...secondHalf];
     } else {
-      return clone;
+      return array;
     }
   }
 

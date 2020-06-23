@@ -13,19 +13,11 @@ export default class QuickSort {
     if (array.length > 1 && low < high) {
       let index = this.partition(array, low, high);
       if (low < index - 1) {
-        this.sort(
-          array,
-          low,
-          index - 1
-        );
+        this.sort(array, low, index - 1);
       }
 
       if (high > index) {
-        this.sort(
-          array,
-          index + 1,
-          high
-        );
+        this.sort(array, index + 1, high);
       }
 
       return array;
@@ -34,10 +26,13 @@ export default class QuickSort {
     }
   }
 
-  *stepSort(array = this.arrayToSort, low = 0, high = this.arrayToSort.length - 1) {
+  *stepSort(
+    array = this.arrayToSort,
+    low = 0,
+    high = this.arrayToSort.length - 1
+  ) {
     if (array.length > 1 && low < high) {
-      // let index = this.partition(array, low, high);
-      for (let element of this._genPartition(array, low, high)) {
+      for (let element of this.stepPartition(array, low, high)) {
         if (element.length) {
           yield element;
         } else {
@@ -73,13 +68,13 @@ export default class QuickSort {
     return i;
   }
 
-  *_genPartition(array, low, high) {
+  *stepPartition(array, low, high) {
     let pivot = array[high];
     let i = low;
     for (let j = low; j < high; j++) {
       if (array[j] < pivot) {
         this.swap(array, i, j);
-        yield array
+        yield array;
         i += 1;
       }
     }

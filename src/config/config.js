@@ -1,6 +1,6 @@
 export default {
   length: 100,
-  animationInterval: 10,
+  animationInterval: 100,
   barChartOptions: {
     animation: {
       duration: 0, // general animation time

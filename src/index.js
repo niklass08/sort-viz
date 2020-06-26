@@ -4,7 +4,8 @@ import SortChart from "./component/SortChart";
 
 import SelectionSort from "./sorts/selectionSort";
 import BubbleSort from "./sorts/BubbleSort";
-import QuickSort from "./sorts/QuickSort"
+import QuickSort from "./sorts/QuickSort";
+import MergeSort from "./sorts/MergeSort";
 
 import "./style/index.css";
 
@@ -30,6 +31,13 @@ ReactDOM.render(
           sort={QuickSort}
           color="#70CAD1"
           title="Quick sort"
+        ></SortChart>
+      </div>
+      <div class="chart">
+        <SortChart
+          sort={MergeSort}
+          color="#70CAD1"
+          title="Merge sort"
         ></SortChart>
       </div>
     </div>

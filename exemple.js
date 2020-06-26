@@ -5,4 +5,6 @@ const randomSequence = generateRandomSequence(15);
 console.log(randomSequence);
 const mergeSort = new MergeSort(randomSequence);
 
-console.log(mergeSort.sort(mergeSort.arrayToSort));
+for (let step of mergeSort.stepSort()) {
+  console.log(step);
+}

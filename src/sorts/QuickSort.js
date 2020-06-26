@@ -39,7 +39,7 @@ export default class QuickSort {
           var index = element;
         }
       }
-      yield array;
+      //yield array;
       if (low < index - 1) {
         for (let step of this.stepSort(array, low, index - 1)) {
           yield step;
@@ -51,7 +51,7 @@ export default class QuickSort {
           yield step;
         }
       }
-      yield array;
+      //yield array;
     }
   }
 
